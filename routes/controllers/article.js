@@ -1,8 +1,15 @@
 const article = require("./../../db/model/article");
 
 const createArticle = (req, res) => {
-  const { name, dec } = req.body;
-  const newArticle = new article({ name, dec });
+  const { author, title, description, urlToImage, publishedAt } = req.body;
+
+  const newArticle = new article({
+    author,
+    title,
+    description,
+    urlToImage,
+    publishedAt,
+  });
 
   newArticle
     .save()
