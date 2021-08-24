@@ -45,8 +45,22 @@ const getArticleById = (req, res) => {
     });
 };
 
+const getArticlesByCategory = (req, res) => {
+  const category = req.params.category;
+
+  article
+    .find({ category: category })
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).send("cannot get");
+    });
+};
+
 module.exports = {
   createArticle,
   getArticles,
   getArticleById,
+  getArticlesByCategory,
 };
