@@ -1,7 +1,8 @@
 const article = require("./../../db/model/article");
 
 const createArticle = (req, res) => {
-  const { author, title, description, urlToImage, publishedAt } = req.body;
+  const { author, title, description, urlToImage, publishedAt, category } =
+    req.body;
 
   const newArticle = new article({
     author,
@@ -9,6 +10,7 @@ const createArticle = (req, res) => {
     description,
     urlToImage,
     publishedAt,
+    category,
   });
 
   newArticle
@@ -24,6 +26,7 @@ const createArticle = (req, res) => {
 const getArticles = (req, res) => {
   article
     .find({})
+    .populate("categories")
     .then((result) => {
       res.status(200).json(result);
     })
